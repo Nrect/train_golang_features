@@ -5,6 +5,7 @@ import (
 	"github.com/stretchr/testify/suite"
 	_ "github.com/stretchr/testify/suite"
 	lib "testProject/src/lib"
+	mockRepo "testProject/src/repo/mock"
 	"testing"
 )
 
@@ -19,6 +20,7 @@ type CalculateFromFormulaSuite struct {
 	BadVariableErrorNul    []variableTestCalculateFromFormula
 	BadVariableErrorNotNul []variableTestCalculateFromFormula
 	MockRequestVariable    []variableTestCalculateFromFormula
+	MockDbResponse         *mockRepo.ResponseDb
 }
 
 func (suite *CalculateFromFormulaSuite) SetupTest() {
@@ -42,6 +44,8 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 		{testValue: "5 * some text"},
 	}
 
+	suite.MockDbResponse = mockRepo.NewMockDbResponse()
+
 	suite.MockRequestVariable = []variableTestCalculateFromFormula{
 		{testValue: "detailsTip", wantResult: 10},
 	}
@@ -50,7 +54,7 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 // TestGoodVariable
 func (suite *CalculateFromFormulaSuite) TestGoodVariable() {
 	for _, v := range suite.GoodVariable {
-		result, err := lib.CalculateFromFormula(v.testValue)
+		result, err := lib.CalculateFromFormula(v.testValue, suite.MockDbResponse)
 		assert.Nil(suite.T(), err, "Should be nil")
 		assert.Equal(suite.T(), v.wantResult, result, "Should be equal")
 	}
@@ -59,7 +63,7 @@ func (suite *CalculateFromFormulaSuite) TestGoodVariable() {
 // TestBadVariableErrorNul
 func (suite *CalculateFromFormulaSuite) TestBadVariableErrorNul() {
 	for _, v := range suite.BadVariableErrorNul {
-		_, err := lib.CalculateFromFormula(v.testValue)
+		_, err := lib.CalculateFromFormula(v.testValue, suite.MockDbResponse)
 		assert.Nil(suite.T(), err, "Should be nil")
 	}
 }
@@ -67,8 +71,17 @@ func (suite *CalculateFromFormulaSuite) TestBadVariableErrorNul() {
 // TestBadVariableErrorNotNul
 func (suite *CalculateFromFormulaSuite) TestBadVariableErrorNotNul() {
 	for _, v := range suite.BadVariableErrorNotNul {
-		_, err := lib.CalculateFromFormula(v.testValue)
+		_, err := lib.CalculateFromFormula(v.testValue, suite.MockDbResponse)
 		assert.NotNil(suite.T(), err, "Should not be nil")
+	}
+}
+
+// TestMockDbVariables
+func (suite *CalculateFromFormulaSuite) TestMockDbVariables() {
+	for _, v := range suite.MockRequestVariable {
+		result, err := lib.CalculateFromFormula(v.testValue, suite.MockDbResponse)
+		assert.Nil(suite.T(), err, "Should be nil")
+		assert.Equal(suite.T(), v.wantResult, result, "Should be equal")
 	}
 }
 

@@ -5,15 +5,15 @@ import (
 	"reflect"
 )
 
-func GetPropertyStruct(obj interface{}, fieldName string) reflect.Value {
+func GetPropertyStruct(obj interface{}, fieldName string) (reflect.Value, error) {
 	pointToStruct := reflect.ValueOf(obj) // addressable
 	curStruct := pointToStruct.Elem()
 	if curStruct.Kind() != reflect.Struct {
-		fmt.Println("not struct")
+		return reflect.Value{}, fmt.Errorf("not struct")
 	}
 	curField := curStruct.FieldByName(fieldName) // type: reflect.Value
 	if !curField.IsValid() {
-		fmt.Println("not found:" + fieldName)
+		return reflect.Value{}, fmt.Errorf("not found:" + fieldName)
 	}
-	return curField
+	return curField, nil
 }

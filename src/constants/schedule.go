@@ -3,17 +3,17 @@ package constants
 type ScheduleMoneyField string
 
 const (
-	detailsTip        ScheduleMoneyField = "detailsTip"
-	detailsCash       ScheduleMoneyField = "detailsCash"
-	detailsCard       ScheduleMoneyField = "detailsCard"
-	detailsIncome     ScheduleMoneyField = "detailsIncome"
-	detailsNetCash    ScheduleMoneyField = "detailsNetCash"
-	detailsNetCard    ScheduleMoneyField = "detailsNetCard"
-	parkCommission    ScheduleMoneyField = "parkCommission"
-	serviceCommission ScheduleMoneyField = "serviceCommission"
-	driverPercent     ScheduleMoneyField = "driverPercent"
-	earnAmount        ScheduleMoneyField = "earnAmount"
-	companyProfit     ScheduleMoneyField = "companyProfit"
+	detailsTip        ScheduleMoneyField = "DetailsTip"
+	detailsCash       ScheduleMoneyField = "DetailsCash"
+	detailsCard       ScheduleMoneyField = "DetailsCard"
+	detailsIncome     ScheduleMoneyField = "DetailsIncome"
+	detailsNetCash    ScheduleMoneyField = "DetailsNetCash"
+	detailsNetCard    ScheduleMoneyField = "DetailsNetCard"
+	parkCommission    ScheduleMoneyField = "ParkCommission"
+	serviceCommission ScheduleMoneyField = "ServiceCommission"
+	driverPercent     ScheduleMoneyField = "DriverPercent"
+	earnAmount        ScheduleMoneyField = "EarnAmount"
+	companyProfit     ScheduleMoneyField = "CompanyProfit"
 )
 
 func GetScheduleMoneyFieldNames() []ScheduleMoneyField {
