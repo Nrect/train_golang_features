@@ -28,7 +28,6 @@ func GetScheduleMoneyFieldNames() []ScheduleMoneyField {
 		ServiceCommission,
 		DriverPercent,
 		EarnAmount,
-		CompanyProfit,
 	}
 	return scheduleMoneyFieldNames
 }
