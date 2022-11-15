@@ -4,6 +4,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	_ "github.com/stretchr/testify/suite"
+	"testProject/src/constants"
 	lib "testProject/src/lib"
 	mockRepo "testProject/src/repo/mock"
 	"testing"
@@ -47,7 +48,7 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 	suite.MockDbResponse = mockRepo.NewMockDbResponse()
 
 	suite.MockRequestVariable = []variableTestCalculateFromFormula{
-		{testValue: "detailsTip", wantResult: 10},
+		{testValue: constants.DetailsTip.ToString(), wantResult: 10},
 	}
 }
 

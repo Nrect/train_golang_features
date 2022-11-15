@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"fmt"
 	"github.com/Knetic/govaluate"
 	"reflect"
 	"testProject/src/constants"
@@ -29,8 +28,6 @@ func CalculateFromFormula(formula string, repo *mockRepo.ResponseDb) (float64, e
 	if err != nil {
 		return 0, err
 	}
-
-	fmt.Println(parameters)
 
 	formulaSum := reflect.ValueOf(result).Float()
 	return formulaSum, nil
