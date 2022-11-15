@@ -26,7 +26,7 @@ func NewMockDbResponse() *ResponseDb {
 		DetailsNetCard:    utils.GetRandomMoneyValue(),
 		ParkCommission:    utils.GetRandomMoneyValue(),
 		ServiceCommission: utils.GetRandomMoneyValue(),
-		DriverPercent:     utils.GetRandomMoneyValue(),
+		DriverPercent:     40,
 		EarnAmount:        utils.GetRandomMoneyValue(),
 		CompanyProfit:     utils.GetRandomMoneyValue(),
 	}

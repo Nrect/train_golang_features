@@ -1,6 +1,7 @@
 package unit
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	_ "github.com/stretchr/testify/suite"
@@ -46,9 +47,29 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 	}
 
 	suite.MockDbResponse = mockRepo.NewMockDbResponse()
+	dbResponse := suite.MockDbResponse
 
 	suite.MockRequestVariable = []variableTestCalculateFromFormula{
-		{testValue: constants.DetailsTip.ToString(), wantResult: 10},
+		{testValue: constants.DetailsTip.ToString(), wantResult: dbResponse.DetailsTip},
+		{
+			testValue: fmt.Sprintf(
+				"%s + %s + %s",
+				constants.DetailsIncome,
+				constants.DetailsTip,
+				constants.DetailsCard,
+			),
+			wantResult: dbResponse.DetailsIncome + dbResponse.DetailsTip + dbResponse.DetailsCard,
+		},
+		{
+			testValue: fmt.Sprintf(
+				"%s * %s - %s * %s + 3000",
+				constants.DetailsIncome,
+				constants.DriverPercent,
+				constants.DetailsCard,
+				constants.DriverPercent,
+			),
+			wantResult: dbResponse.DetailsIncome*dbResponse.DriverPercent - dbResponse.DetailsCard*dbResponse.DriverPercent + 3000,
+		},
 	}
 }
 
