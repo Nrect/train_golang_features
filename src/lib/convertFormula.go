@@ -13,15 +13,9 @@ func CalculateFromFormula(formula string, repo *mockRepo.ResponseDb) (float64, e
 		return 0, err
 	}
 
-	scheduleMoneyFieldNames := constants.GetScheduleMoneyFieldNames()
-	parameters := make(map[string]interface{}, len(scheduleMoneyFieldNames))
-
-	for _, field := range scheduleMoneyFieldNames {
-		parameters[string(field)], err = repo.GetMockDbResponseValue(string(field))
-
-		if err != nil {
-			return 0, err
-		}
+	parameters, err := generateParameters(repo)
+	if err != nil {
+		return 0, err
 	}
 
 	result, err := expression.Evaluate(parameters)
@@ -31,4 +25,21 @@ func CalculateFromFormula(formula string, repo *mockRepo.ResponseDb) (float64, e
 
 	formulaSum := reflect.ValueOf(result).Float()
 	return formulaSum, nil
+}
+
+// generateParameters generate static parameters for formula
+func generateParameters(repo *mockRepo.ResponseDb) (map[string]interface{}, error) {
+	scheduleMoneyFieldNames := constants.GetScheduleMoneyFieldNames()
+	parameters := make(map[string]interface{}, len(scheduleMoneyFieldNames))
+
+	for _, field := range scheduleMoneyFieldNames {
+		dbFieldValue, err := repo.GetMockDbResponseValue(field.ToString())
+		parameters[field.ToString()] = dbFieldValue
+
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return parameters, nil
 }
