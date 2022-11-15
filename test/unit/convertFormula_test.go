@@ -8,9 +8,10 @@ import (
 	"testing"
 )
 
-const (
-	x = "x + y"
-)
+type mockRequest struct {
+	cacheKeyName string
+	dbValue      float64
+}
 
 type variableTestCalculateFromFormula struct {
 	testValue  string
@@ -22,6 +23,7 @@ type CalculateFromFormulaSuite struct {
 	GoodVariable           []variableTestCalculateFromFormula
 	BadVariableErrorNul    []variableTestCalculateFromFormula
 	BadVariableErrorNotNul []variableTestCalculateFromFormula
+	MockRequest            []mockRequest
 }
 
 func (suite *CalculateFromFormulaSuite) SetupTest() {
@@ -43,6 +45,12 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 	suite.BadVariableErrorNotNul = []variableTestCalculateFromFormula{
 		{testValue: "5 / "},
 		{testValue: "5 * some text"},
+	}
+
+	suite.MockRequest = []mockRequest{
+		{cacheKeyName: "testKey", dbValue: 5.1},
+		{cacheKeyName: "testKey2", dbValue: 10.15},
+		{cacheKeyName: "testKey3", dbValue: 100.5},
 	}
 }
 
@@ -72,6 +80,6 @@ func (suite *CalculateFromFormulaSuite) TestBadVariableErrorNotNul() {
 }
 
 // TestSuite run tests
-func TestSuite(t *testing.T) {
+func TestCalculateFromFormulaSuite(t *testing.T) {
 	suite.Run(t, new(CalculateFromFormulaSuite))
 }
