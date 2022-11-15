@@ -16,8 +16,8 @@ type responseDb struct {
 	companyProfit     float64
 }
 
-func FetMockScheduleMoneyFromRepo(keyName string) float64 {
-	randomDbValues := &responseDb{
+func NewMockDbResponse() *responseDb {
+	return &responseDb{
 		detailsTip:        utils.GetRandomMoneyValue(),
 		detailsCash:       utils.GetRandomMoneyValue(),
 		detailsCard:       utils.GetRandomMoneyValue(),
@@ -30,7 +30,9 @@ func FetMockScheduleMoneyFromRepo(keyName string) float64 {
 		earnAmount:        utils.GetRandomMoneyValue(),
 		companyProfit:     utils.GetRandomMoneyValue(),
 	}
+}
 
-	value := utils.GetPropertyStruct(randomDbValues, keyName)
+func (r *responseDb) GetMockDbResponseValue(keyName string) float64 {
+	value := utils.GetPropertyStruct(r, keyName)
 	return value.Float()
 }

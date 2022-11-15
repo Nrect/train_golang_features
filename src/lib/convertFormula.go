@@ -16,8 +16,10 @@ func CalculateFromFormula(formula string) (float64, error) {
 	scheduleMoneyFieldNames := constants.GetScheduleMoneyFieldNames()
 	parameters := make(map[string]interface{}, len(scheduleMoneyFieldNames))
 
+	repo := mockRepo.NewMockDbResponse()
+
 	for _, field := range scheduleMoneyFieldNames {
-		parameters[string(field)] = mockRepo.FetMockScheduleMoneyFromRepo(string(field))
+		parameters[string(field)] = repo.GetMockDbResponseValue(string(field))
 	}
 
 	result, err := expression.Evaluate(parameters)

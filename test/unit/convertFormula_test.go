@@ -8,11 +8,6 @@ import (
 	"testing"
 )
 
-type mockRequest struct {
-	cacheKeyName string
-	dbValue      float64
-}
-
 type variableTestCalculateFromFormula struct {
 	testValue  string
 	wantResult float64
@@ -23,7 +18,7 @@ type CalculateFromFormulaSuite struct {
 	GoodVariable           []variableTestCalculateFromFormula
 	BadVariableErrorNul    []variableTestCalculateFromFormula
 	BadVariableErrorNotNul []variableTestCalculateFromFormula
-	MockRequest            []mockRequest
+	MockRequestVariable    []variableTestCalculateFromFormula
 }
 
 func (suite *CalculateFromFormulaSuite) SetupTest() {
@@ -47,10 +42,8 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 		{testValue: "5 * some text"},
 	}
 
-	suite.MockRequest = []mockRequest{
-		{cacheKeyName: "testKey", dbValue: 5.1},
-		{cacheKeyName: "testKey2", dbValue: 10.15},
-		{cacheKeyName: "testKey3", dbValue: 100.5},
+	suite.MockRequestVariable = []variableTestCalculateFromFormula{
+		{testValue: "detailsTip", wantResult: 10},
 	}
 }
 
