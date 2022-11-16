@@ -1,4 +1,4 @@
-package unit
+package calculateFromFormula
 
 import (
 	"github.com/stretchr/testify/suite"

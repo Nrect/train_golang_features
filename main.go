@@ -5,9 +5,7 @@ import (
 	"github.com/samber/lo"
 	"strconv"
 	"strings"
-	"testProject/src/constants"
-	"testProject/src/lib"
-	mockRepo "testProject/src/repo/mock"
+	"testProject/packages/calculateFromFormula"
 )
 
 func main() {
@@ -21,14 +19,16 @@ func main() {
 		validateCharacter(character)
 	}
 
-	repo := mockRepo.NewMockDbResponse()
-	_, err := lib.CalculateFromFormula(testStr, repo)
+	repo := calculateFromFormula.NewMockDbResponse()
+	result, err := calculateFromFormula.CalculateFromFormula(testStr, repo)
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	fmt.Println(result)
 }
 
 func validateCharacter(character string) {
-	isValid := lo.Contains[string](constants.GetAvailableFormulaCharacters(), character)
+	isValid := lo.Contains[string](calculateFromFormula.GetAvailableFormulaCharacters(), character)
 	fmt.Println(isValid)
 }

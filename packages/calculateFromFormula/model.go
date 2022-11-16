@@ -1,6 +1,6 @@
-package mockRepo
+package calculateFromFormula
 
-import "testProject/src/utils"
+import "testProject/packages/calculateFromFormula/utils"
 
 type FormulaResponseDb struct {
 	DetailsTip        float64

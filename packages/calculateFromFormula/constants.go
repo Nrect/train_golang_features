@@ -1,4 +1,4 @@
-package constants
+package calculateFromFormula
 
 const (
 	DetailsTip        ScheduleMoneyField = "DetailsTip"

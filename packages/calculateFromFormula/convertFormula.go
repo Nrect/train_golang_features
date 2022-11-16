@@ -1,19 +1,17 @@
-package lib
+package calculateFromFormula
 
 import (
 	"github.com/Knetic/govaluate"
 	"reflect"
-	"testProject/src/constants"
-	mockRepo "testProject/src/repo/mock"
 )
 
-func CalculateFromFormula(formula string, responseDb *mockRepo.FormulaResponseDb) (float64, error) {
+func CalculateFromFormula(formula string, responseDb *FormulaResponseDb) (float64, error) {
 	expression, err := govaluate.NewEvaluableExpression(formula)
 	if err != nil {
 		return 0, err
 	}
 
-	parameters, err := generateParameters(responseDb)
+	parameters, err := GenerateParameters(responseDb)
 	if err != nil {
 		return 0, err
 	}
@@ -27,9 +25,9 @@ func CalculateFromFormula(formula string, responseDb *mockRepo.FormulaResponseDb
 	return formulaSum, nil
 }
 
-// generateParameters generate static parameters for formula
-func generateParameters(responseDb *mockRepo.FormulaResponseDb) (map[string]interface{}, error) {
-	scheduleMoneyFieldNames := constants.GetScheduleMoneyFieldNames()
+// GenerateParameters generate static parameters for formula
+func GenerateParameters(responseDb *FormulaResponseDb) (map[string]interface{}, error) {
+	scheduleMoneyFieldNames := GetScheduleMoneyFieldNames()
 	parameters := make(map[string]interface{}, len(scheduleMoneyFieldNames))
 
 	for _, field := range scheduleMoneyFieldNames {
