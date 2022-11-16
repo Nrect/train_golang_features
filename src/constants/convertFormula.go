@@ -1,7 +1,5 @@
 package constants
 
-type ScheduleMoneyField string
-
 const (
 	DetailsTip        ScheduleMoneyField = "DetailsTip"
 	DetailsCash       ScheduleMoneyField = "DetailsCash"
@@ -15,6 +13,12 @@ const (
 	EarnAmount        ScheduleMoneyField = "EarnAmount"
 	CompanyProfit     ScheduleMoneyField = "CompanyProfit"
 )
+
+type ScheduleMoneyField string
+
+func (s ScheduleMoneyField) ToString() string {
+	return string(s)
+}
 
 func GetScheduleMoneyFieldNames() []string {
 	scheduleMoneyFieldNames := []string{
@@ -32,6 +36,14 @@ func GetScheduleMoneyFieldNames() []string {
 	return scheduleMoneyFieldNames
 }
 
-func (s ScheduleMoneyField) ToString() string {
-	return string(s)
+func GetAvailableFormulaCharacters() []string {
+	availableFormulaCharacters := []string{
+		"+",
+		"-",
+		"*",
+		"/",
+	}
+	availableFormulaCharacters = append(availableFormulaCharacters, GetScheduleMoneyFieldNames()...)
+
+	return availableFormulaCharacters
 }
