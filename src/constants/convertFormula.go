@@ -16,18 +16,18 @@ const (
 	CompanyProfit     ScheduleMoneyField = "CompanyProfit"
 )
 
-func GetScheduleMoneyFieldNames() []ScheduleMoneyField {
-	scheduleMoneyFieldNames := []ScheduleMoneyField{
-		DetailsTip,
-		DetailsCash,
-		DetailsCard,
-		DetailsIncome,
-		DetailsNetCash,
-		DetailsNetCard,
-		ParkCommission,
-		ServiceCommission,
-		DriverPercent,
-		EarnAmount,
+func GetScheduleMoneyFieldNames() []string {
+	scheduleMoneyFieldNames := []string{
+		DetailsTip.ToString(),
+		DetailsCash.ToString(),
+		DetailsCard.ToString(),
+		DetailsIncome.ToString(),
+		DetailsNetCash.ToString(),
+		DetailsNetCard.ToString(),
+		ParkCommission.ToString(),
+		ServiceCommission.ToString(),
+		DriverPercent.ToString(),
+		EarnAmount.ToString(),
 	}
 	return scheduleMoneyFieldNames
 }

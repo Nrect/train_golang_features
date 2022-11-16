@@ -33,8 +33,8 @@ func generateParameters(responseDb *mockRepo.FormulaResponseDb) (map[string]inte
 	parameters := make(map[string]interface{}, len(scheduleMoneyFieldNames))
 
 	for _, field := range scheduleMoneyFieldNames {
-		dbFieldValue, err := responseDb.GetMockDbResponseValue(field.ToString())
-		parameters[field.ToString()] = dbFieldValue
+		dbFieldValue, err := responseDb.GetMockDbResponseValue(field)
+		parameters[field] = dbFieldValue
 
 		if err != nil {
 			return nil, err
