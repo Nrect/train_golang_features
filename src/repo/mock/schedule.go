@@ -2,7 +2,7 @@ package mockRepo
 
 import "testProject/src/utils"
 
-type ResponseDb struct {
+type FormulaResponseDb struct {
 	DetailsTip        float64
 	DetailsCash       float64
 	DetailsCard       float64
@@ -16,8 +16,8 @@ type ResponseDb struct {
 	CompanyProfit     float64
 }
 
-func NewMockDbResponse() *ResponseDb {
-	return &ResponseDb{
+func NewMockDbResponse() *FormulaResponseDb {
+	return &FormulaResponseDb{
 		DetailsTip:        utils.GetRandomMoneyValue(),
 		DetailsCash:       utils.GetRandomMoneyValue(),
 		DetailsCard:       utils.GetRandomMoneyValue(),
@@ -32,7 +32,7 @@ func NewMockDbResponse() *ResponseDb {
 	}
 }
 
-func (r *ResponseDb) GetMockDbResponseValue(keyName string) (float64, error) {
+func (r *FormulaResponseDb) GetMockDbResponseValue(keyName string) (float64, error) {
 	value, err := utils.GetPropertyStruct(r, keyName)
 	if err != nil {
 		return 0, err

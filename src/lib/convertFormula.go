@@ -7,7 +7,7 @@ import (
 	mockRepo "testProject/src/repo/mock"
 )
 
-func CalculateFromFormula(formula string, responseDb *mockRepo.ResponseDb) (float64, error) {
+func CalculateFromFormula(formula string, responseDb *mockRepo.FormulaResponseDb) (float64, error) {
 	expression, err := govaluate.NewEvaluableExpression(formula)
 	if err != nil {
 		return 0, err
@@ -28,7 +28,7 @@ func CalculateFromFormula(formula string, responseDb *mockRepo.ResponseDb) (floa
 }
 
 // generateParameters generate static parameters for formula
-func generateParameters(responseDb *mockRepo.ResponseDb) (map[string]interface{}, error) {
+func generateParameters(responseDb *mockRepo.FormulaResponseDb) (map[string]interface{}, error) {
 	scheduleMoneyFieldNames := constants.GetScheduleMoneyFieldNames()
 	parameters := make(map[string]interface{}, len(scheduleMoneyFieldNames))
 

@@ -22,7 +22,7 @@ type CalculateFromFormulaSuite struct {
 	BadVariableErrorNul    []variableTestCalculateFromFormula
 	BadVariableErrorNotNul []variableTestCalculateFromFormula
 	MockRequestVariable    []variableTestCalculateFromFormula
-	MockDbResponse         *mockRepo.ResponseDb
+	MockDbResponse         *mockRepo.FormulaResponseDb
 }
 
 func (suite *CalculateFromFormulaSuite) SetupTest() {
