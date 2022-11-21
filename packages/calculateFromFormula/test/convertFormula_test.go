@@ -25,10 +25,10 @@ type CalculateFromFormulaSuite struct {
 
 func (suite *CalculateFromFormulaSuite) SetupTest() {
 	suite.GoodVariable = []variableTestCalculateFromFormula{
-		{testValue: "5+5", wantResult: 10},
-		{testValue: "5-5", wantResult: 0},
-		{testValue: "5*5", wantResult: 25},
-		{testValue: "5/5", wantResult: 1},
+		{testValue: "5 + 5", wantResult: 10},
+		{testValue: "5 - 5", wantResult: 0},
+		{testValue: "5 * 5", wantResult: 25},
+		{testValue: "5 / 5", wantResult: 1},
 		{testValue: "5 + (5 * 2)", wantResult: 15},
 		{testValue: "5 + 5 * 2", wantResult: 15},
 		{testValue: "5.5 + 5 * 2", wantResult: 15.5},
@@ -50,25 +50,15 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 	dbResponse := suite.MockDbResponse
 
 	suite.MockRequestVariable = []variableTestCalculateFromFormula{
-		{testValue: calculateFromFormula.DetailsTip.ToString(), wantResult: dbResponse.DetailsTip},
+		{testValue: calculateFromFormula.DetailsCard.ToString(), wantResult: dbResponse.DetailsCard},
 		{
 			testValue: fmt.Sprintf(
 				"%s + %s + %s",
-				calculateFromFormula.DetailsIncome,
-				calculateFromFormula.DetailsTip,
+				calculateFromFormula.CashIncome,
 				calculateFromFormula.DetailsCard,
+				calculateFromFormula.Tip,
 			),
-			wantResult: dbResponse.DetailsIncome + dbResponse.DetailsTip + dbResponse.DetailsCard,
-		},
-		{
-			testValue: fmt.Sprintf(
-				"%s * %s - %s * %s + 3000",
-				calculateFromFormula.DetailsIncome,
-				calculateFromFormula.DriverPercent,
-				calculateFromFormula.DetailsCard,
-				calculateFromFormula.DriverPercent,
-			),
-			wantResult: dbResponse.DetailsIncome*dbResponse.DriverPercent - dbResponse.DetailsCard*dbResponse.DriverPercent + 3000,
+			wantResult: dbResponse.CashIncome + dbResponse.DetailsCard + dbResponse.Tip,
 		},
 	}
 }
@@ -77,7 +67,7 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 func (suite *CalculateFromFormulaSuite) TestGoodVariable() {
 	for _, v := range suite.GoodVariable {
 		result, err := calculateFromFormula.CalculateFromFormula(v.testValue, suite.MockDbResponse)
-		assert.Nil(suite.T(), err, "Should be nil")
+		assert.Nil(suite.T(), err, fmt.Sprintf("Should be nil.Value: %+v. Result: %f", v, err))
 		assert.Equal(suite.T(), v.wantResult, result, "Should be equal")
 	}
 }

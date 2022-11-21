@@ -1,19 +1,15 @@
 package calculateFromFormula
 
 import (
-	"fmt"
 	"github.com/Knetic/govaluate"
-	"github.com/samber/lo"
 	"reflect"
-	"strconv"
-	"strings"
 )
 
 func CalculateFromFormula(formula string, responseDb *FormulaResponseDb) (float64, error) {
-	err := validateCharacter(formula)
-	if err != nil {
-		return 0, err
-	}
+	//err := validateCharacter(formula)
+	//if err != nil {
+	//	return 0, err
+	//}
 
 	expression, err := govaluate.NewEvaluableExpression(formula)
 	if err != nil {
@@ -52,20 +48,20 @@ func GenerateParameters(responseDb *FormulaResponseDb) (map[string]interface{}, 
 }
 
 // validateCharacter validate characters for formula
-func validateCharacter(formula string) error {
-	convertTestStr := strings.Split(formula, " ")
-	isValid := false
-
-	for _, character := range convertTestStr {
-		if _, err := strconv.Atoi(character); err == nil {
-			continue
-		}
-		isValid = lo.Contains[string](GetAvailableFormulaCharacters(), character)
-	}
-
-	if isValid != true {
-		return fmt.Errorf(" Formula is not correct")
-	}
-
-	return nil
-}
+//func validateCharacter(formula string) error {
+//	convertTestStr := strings.Split(formula, " ")
+//	isValid := false
+//
+//	for _, character := range convertTestStr {
+//		if _, err := strconv.Atoi(character); err == nil {
+//			continue
+//		}
+//		isValid = lo.Contains[string](GetAvailableFormulaCharacters(), character)
+//	}
+//
+//	if isValid != true {
+//		return fmt.Errorf(" Formula is not correct")
+//	}
+//
+//	return nil
+//}

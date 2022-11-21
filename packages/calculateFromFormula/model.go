@@ -3,6 +3,7 @@ package calculateFromFormula
 import "testProject/packages/calculateFromFormula/utils"
 
 type FormulaResponseDb struct {
+	CashIncome        float64
 	DetailsTip        float64
 	DetailsCash       float64
 	DetailsCard       float64
@@ -14,11 +15,13 @@ type FormulaResponseDb struct {
 	DriverPercent     float64
 	EarnAmount        float64
 	CompanyProfit     float64
+	Tip               float64
 }
 
 func NewMockDbResponse() *FormulaResponseDb {
 	return &FormulaResponseDb{
 		DetailsTip:        utils.GetRandomMoneyValue(),
+		CashIncome:        utils.GetRandomMoneyValue(),
 		DetailsCash:       utils.GetRandomMoneyValue(),
 		DetailsCard:       utils.GetRandomMoneyValue(),
 		DetailsIncome:     utils.GetRandomMoneyValue(),
