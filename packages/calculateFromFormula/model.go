@@ -18,6 +18,7 @@ import "testProject/packages/calculateFromFormula/utils"
 		SurchargeSum -  доплаты
 	    FuelSum -  топливо
 	    DriverPercent - % водителя
+	    CompanyPercent - % компании
 */
 
 const (
@@ -35,6 +36,7 @@ const (
 	SurchargeSum        ScheduleMoneyField = "SurchargeSum"
 	FuelSum             ScheduleMoneyField = "FuelSum"
 	DriverPercent       ScheduleMoneyField = "DriverPercent"
+	CompanyPercent      ScheduleMoneyField = "CompanyPercent"
 )
 
 type ScheduleMoneyField string
@@ -58,6 +60,7 @@ type FormulaResponseDb struct {
 	SurchargeSum        float64
 	FuelSum             float64
 	DriverPercent       float64
+	CompanyPercent      float64
 }
 
 func NewMockDbResponse() *FormulaResponseDb {
@@ -103,6 +106,7 @@ func GetScheduleMoneyFieldNames() []string {
 		SurchargeSum.ToString(),
 		FuelSum.ToString(),
 		DriverPercent.ToString(),
+		CompanyPercent.ToString(),
 	}
 	return scheduleMoneyFieldNames
 }
