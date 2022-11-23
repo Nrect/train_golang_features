@@ -2,36 +2,80 @@ package calculateFromFormula
 
 import "testProject/packages/calculateFromFormula/utils"
 
+/*
+		DetailsIncome - общий накат (бэк)
+		CommonTenantsIncome - общий доход арендатора(на фронте)
+		EarnAmount - чистый доход арендатора (бэк)
+		GiveOutAmount - к выплате арендатору (на фронте)
+		CompanyProfit - прибыль компании (бэк)
+
+		DetailsCash - наличные, без чаевых
+		DetailsCard - безналичные, без чаевых
+		DetailsTip - безналичные чаевые
+		ServiceCommission -  комиссия агрегатора
+		ParkCommission - комиссия партнера
+		RetentionSum -  удержания
+		SurchargeSum -  доплаты
+	    FuelSum -  топливо
+	    DriverPercent - % водителя
+*/
+
+const (
+	DetailsIncome       ScheduleMoneyField = "DetailsIncome"
+	CommonTenantsIncome ScheduleMoneyField = "CommonTenantsIncome"
+	EarnAmount          ScheduleMoneyField = "EarnAmount"
+	GiveOutAmount       ScheduleMoneyField = "GiveOutAmount"
+	CompanyProfit       ScheduleMoneyField = "CompanyProfit"
+	DetailsCash         ScheduleMoneyField = "DetailsCash"
+	DetailsCard         ScheduleMoneyField = "DetailsCard"
+	DetailsTip          ScheduleMoneyField = "DetailsTip"
+	ServiceCommission   ScheduleMoneyField = "ServiceCommission"
+	ParkCommission      ScheduleMoneyField = "ParkCommission"
+	RetentionSum        ScheduleMoneyField = "RetentionSum"
+	SurchargeSum        ScheduleMoneyField = "SurchargeSum"
+	FuelSum             ScheduleMoneyField = "FuelSum"
+	DriverPercent       ScheduleMoneyField = "DriverPercent"
+)
+
+type ScheduleMoneyField string
+
+func (s ScheduleMoneyField) ToString() string {
+	return string(s)
+}
+
 type FormulaResponseDb struct {
-	CashIncome        float64
-	DetailsTip        float64
-	DetailsCash       float64
-	DetailsCard       float64
-	DetailsIncome     float64
-	DetailsNetCash    float64
-	DetailsNetCard    float64
-	ParkCommission    float64
-	ServiceCommission float64
-	DriverPercent     float64
-	EarnAmount        float64
-	CompanyProfit     float64
-	Tip               float64
+	DetailsIncome       float64
+	CommonTenantsIncome float64
+	EarnAmount          float64
+	GiveOutAmount       float64
+	CompanyProfit       float64
+	DetailsCash         float64
+	DetailsCard         float64
+	DetailsTip          float64
+	ServiceCommission   float64
+	ParkCommission      float64
+	RetentionSum        float64
+	SurchargeSum        float64
+	FuelSum             float64
+	DriverPercent       float64
 }
 
 func NewMockDbResponse() *FormulaResponseDb {
 	return &FormulaResponseDb{
-		DetailsTip:        utils.GetRandomMoneyValue(),
-		CashIncome:        utils.GetRandomMoneyValue(),
-		DetailsCash:       utils.GetRandomMoneyValue(),
-		DetailsCard:       utils.GetRandomMoneyValue(),
-		DetailsIncome:     utils.GetRandomMoneyValue(),
-		DetailsNetCash:    utils.GetRandomMoneyValue(),
-		DetailsNetCard:    utils.GetRandomMoneyValue(),
-		ParkCommission:    utils.GetRandomMoneyValue(),
-		ServiceCommission: utils.GetRandomMoneyValue(),
-		DriverPercent:     40,
-		EarnAmount:        utils.GetRandomMoneyValue(),
-		CompanyProfit:     utils.GetRandomMoneyValue(),
+		DetailsIncome:       utils.GetRandomMoneyValue(),
+		CommonTenantsIncome: utils.GetRandomMoneyValue(),
+		EarnAmount:          utils.GetRandomMoneyValue(),
+		GiveOutAmount:       utils.GetRandomMoneyValue(),
+		CompanyProfit:       utils.GetRandomMoneyValue(),
+		DetailsCash:         utils.GetRandomMoneyValue(),
+		DetailsCard:         utils.GetRandomMoneyValue(),
+		DetailsTip:          utils.GetRandomMoneyValue(),
+		ServiceCommission:   utils.GetRandomMoneyValue(),
+		ParkCommission:      utils.GetRandomMoneyValue(),
+		RetentionSum:        utils.GetRandomMoneyValue(),
+		SurchargeSum:        utils.GetRandomMoneyValue(),
+		FuelSum:             utils.GetRandomMoneyValue(),
+		DriverPercent:       40,
 	}
 }
 
@@ -41,4 +85,38 @@ func (r *FormulaResponseDb) GetMockDbResponseValue(keyName string) (float64, err
 		return 0, err
 	}
 	return value.Float(), nil
+}
+
+func GetScheduleMoneyFieldNames() []string {
+	scheduleMoneyFieldNames := []string{
+		DetailsIncome.ToString(),
+		CommonTenantsIncome.ToString(),
+		EarnAmount.ToString(),
+		GiveOutAmount.ToString(),
+		CompanyProfit.ToString(),
+		DetailsCash.ToString(),
+		DetailsCard.ToString(),
+		DetailsTip.ToString(),
+		ServiceCommission.ToString(),
+		ParkCommission.ToString(),
+		RetentionSum.ToString(),
+		SurchargeSum.ToString(),
+		FuelSum.ToString(),
+		DriverPercent.ToString(),
+	}
+	return scheduleMoneyFieldNames
+}
+
+func GetAvailableFormulaCharacters() []string {
+	availableFormulaCharacters := []string{
+		"+",
+		"-",
+		"*",
+		"/",
+		"(",
+		")",
+	}
+	availableFormulaCharacters = append(availableFormulaCharacters, GetScheduleMoneyFieldNames()...)
+
+	return availableFormulaCharacters
 }

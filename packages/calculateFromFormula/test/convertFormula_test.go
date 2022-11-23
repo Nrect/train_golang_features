@@ -54,11 +54,11 @@ func (suite *CalculateFromFormulaSuite) SetupTest() {
 		{
 			testValue: fmt.Sprintf(
 				"%s + %s + %s",
-				calculateFromFormula.CashIncome,
+				calculateFromFormula.DetailsCash,
 				calculateFromFormula.DetailsCard,
-				calculateFromFormula.Tip,
+				calculateFromFormula.DetailsTip,
 			),
-			wantResult: dbResponse.CashIncome + dbResponse.DetailsCard + dbResponse.Tip,
+			wantResult: dbResponse.DetailsCash + dbResponse.DetailsCard + dbResponse.DetailsTip,
 		},
 	}
 }
@@ -76,7 +76,7 @@ func (suite *CalculateFromFormulaSuite) TestGoodVariable() {
 func (suite *CalculateFromFormulaSuite) TestBadVariableErrorNul() {
 	for _, v := range suite.BadVariableErrorNul {
 		_, err := calculateFromFormula.CalculateFromFormula(v.testValue, suite.MockDbResponse)
-		assert.Nil(suite.T(), err, "Should be nil")
+		assert.Nil(suite.T(), err, fmt.Sprintf("Should be nil.Value: %+v. Result: %f", v, err))
 	}
 }
 
@@ -84,7 +84,7 @@ func (suite *CalculateFromFormulaSuite) TestBadVariableErrorNul() {
 func (suite *CalculateFromFormulaSuite) TestBadVariableErrorNotNul() {
 	for _, v := range suite.BadVariableErrorNotNul {
 		_, err := calculateFromFormula.CalculateFromFormula(v.testValue, suite.MockDbResponse)
-		assert.NotNil(suite.T(), err, "Should not be nil")
+		assert.NotNil(suite.T(), err, fmt.Sprintf("Should not be nil.Value: %+v. Result: %f", v, err))
 	}
 }
 
@@ -92,7 +92,7 @@ func (suite *CalculateFromFormulaSuite) TestBadVariableErrorNotNul() {
 func (suite *CalculateFromFormulaSuite) TestMockDbVariables() {
 	for _, v := range suite.MockRequestVariable {
 		result, err := calculateFromFormula.CalculateFromFormula(v.testValue, suite.MockDbResponse)
-		assert.Nil(suite.T(), err, "Should be nil")
+		assert.Nil(suite.T(), err, fmt.Sprintf("Should be nil.Value: %+v. Result: %f", v, err))
 		assert.Equal(suite.T(), v.wantResult, result, "Should be equal")
 	}
 }

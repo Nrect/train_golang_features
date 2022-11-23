@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	detailsIncome := "CashIncome + DetailsCard + Tip"
+	detailsIncome := "DetailsIncome + CommonTenantsIncome + EarnAmount"
 
 	repo := calculateFromFormula.NewMockDbResponse()
 	result, err := calculateFromFormula.CalculateFromFormula(detailsIncome, repo)
@@ -15,13 +15,4 @@ func main() {
 	} else {
 		fmt.Println(result)
 	}
-}
-
-func testRequestCase() {
-	/*
-		details_income  общий накат
-		cash_income нал, без чаевых
-		details_card безнал, без чаевых
-		tip безнал чаевые
-	*/
 }
