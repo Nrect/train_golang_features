@@ -20,6 +20,17 @@ import "testProject/packages/calculateFromFormula/utils"
 	    DriverPercent - % водителя
 	    CompanyPercent - % компании
 */
+type ScheduleMoneyField string
+type CacheKey string
+
+// TODO: write test for get keys from cache
+const (
+	formulaDetailsIncome       CacheKey = "formula_details_income"
+	formulaCommonTenantsIncome CacheKey = "formula_common_tenants_income"
+	formulaEarnAmount          CacheKey = "formula_earn_amount"
+	formulaGiveOutAmount       CacheKey = "formula_give_out_amount"
+	formulaCompanyProfit       CacheKey = "formula_company_profit"
+)
 
 const (
 	DetailsIncome       ScheduleMoneyField = "DetailsIncome"
@@ -27,19 +38,18 @@ const (
 	EarnAmount          ScheduleMoneyField = "EarnAmount"
 	GiveOutAmount       ScheduleMoneyField = "GiveOutAmount"
 	CompanyProfit       ScheduleMoneyField = "CompanyProfit"
-	DetailsCash         ScheduleMoneyField = "DetailsCash"
-	DetailsCard         ScheduleMoneyField = "DetailsCard"
-	DetailsTip          ScheduleMoneyField = "DetailsTip"
-	ServiceCommission   ScheduleMoneyField = "ServiceCommission"
-	ParkCommission      ScheduleMoneyField = "ParkCommission"
-	RetentionSum        ScheduleMoneyField = "RetentionSum"
-	SurchargeSum        ScheduleMoneyField = "SurchargeSum"
-	FuelSum             ScheduleMoneyField = "FuelSum"
-	DriverPercent       ScheduleMoneyField = "DriverPercent"
-	CompanyPercent      ScheduleMoneyField = "CompanyPercent"
-)
 
-type ScheduleMoneyField string
+	DetailsCash       ScheduleMoneyField = "DetailsCash"
+	DetailsCard       ScheduleMoneyField = "DetailsCard"
+	DetailsTip        ScheduleMoneyField = "DetailsTip"
+	ServiceCommission ScheduleMoneyField = "ServiceCommission"
+	ParkCommission    ScheduleMoneyField = "ParkCommission"
+	RetentionSum      ScheduleMoneyField = "RetentionSum"
+	SurchargeSum      ScheduleMoneyField = "SurchargeSum"
+	FuelSum           ScheduleMoneyField = "FuelSum"
+	DriverPercent     ScheduleMoneyField = "DriverPercent"
+	CompanyPercent    ScheduleMoneyField = "CompanyPercent"
+)
 
 func (s ScheduleMoneyField) ToString() string {
 	return string(s)
