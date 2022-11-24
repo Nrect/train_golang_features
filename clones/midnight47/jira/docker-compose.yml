@@ -103,9 +103,11 @@ services:
     image: postgres:11
     container_name: pg-jira
     environment:
-      - POSTGRES_USER=jiradbuser
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=jiradb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: jiradb
+    ports:
+      - 7432:5432
     volumes:
       - ./volumes/jira_postgres_update:/var/lib/postgresql/data:rw
       - /etc/localtime:/etc/localtime:ro
