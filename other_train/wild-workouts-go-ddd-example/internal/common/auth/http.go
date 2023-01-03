@@ -69,7 +69,7 @@ const (
 )
 
 var (
-	// if we expect that the user of the function may be interested with concrete error,
+	// NoUserInContextError if we expect that the user of the function may be interested with concrete error,
 	// it's a good idea to provide variable with this error
 	NoUserInContextError = commonerrors.NewAuthorizationError("no user in context", "no-user-found")
 )
