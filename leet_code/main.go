@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	testData := [][]int{{1, 2, 30}, {3, 2, 1}, {}}
-	result := easy.MaximumWealth(testData)
+	result := easy.FizzBuzz(15)
 	fmt.Println(result)
 }
