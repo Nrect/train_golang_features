@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	testData := []int{1, 1, 1, 1, 1}
-	result := easy.RunningSum(testData)
+	testData := [][]int{{1, 2, 30}, {3, 2, 1}, {}}
+	result := easy.MaximumWealth(testData)
 	fmt.Println(result)
 }

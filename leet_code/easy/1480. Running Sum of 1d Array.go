@@ -17,7 +17,7 @@ func RunningSum(nums []int) []int {
 
 // other solution better:
 // 1) in-place operation - no additional memory allocated to store result
-// 2) also no additional variable to store the on-going sum
+// 2) also no additional variable to store the ongoing sum
 
 func runningSum(nums []int) []int {
 	for i := 1; i < len(nums); i++ {
