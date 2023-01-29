@@ -4,16 +4,15 @@ package easy
 
 // RunningSum  my answer
 func RunningSum(nums []int) []int {
-	result := make([]int, len(nums))
 	prevElement := 0
 
 	for i, currentNum := range nums {
 		currentNum += prevElement
 		prevElement = currentNum
-		result[i] = currentNum
+		nums[i] = currentNum
 	}
 
-	return result
+	return nums
 }
 
 // other solution better:
