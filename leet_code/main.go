@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
-	result := easy.CanConstruct("aa", "aa")
+	testData := []int{1, 7, 3, 6, 5, 6}
+	result := easy.PivotIndex(testData)
 	fmt.Println(result)
 }
