@@ -75,7 +75,28 @@ func GetCols() []string {
 }
 
 func GetRows(uniqSymbolsCount int) []string {
-	return []string{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З"}
+	template := []string{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З"}
+
+	if uniqSymbolsCount <= 0 || uniqSymbolsCount > 32 {
+		template = template[:0]
+	} else if uniqSymbolsCount <= 4 {
+		template = template[:1]
+	} else if uniqSymbolsCount <= 8 {
+		template = template[:2]
+	} else if uniqSymbolsCount <= 12 {
+		template = template[:3]
+	} else if uniqSymbolsCount <= 16 {
+		template = template[:4]
+	} else if uniqSymbolsCount <= 20 {
+		template = template[:5]
+	} else if uniqSymbolsCount <= 24 {
+		template = template[:6]
+	} else if uniqSymbolsCount <= 28 {
+		template = template[:7]
+	} else if uniqSymbolsCount <= 32 {
+		template = template[:8]
+	}
+	return template
 }
 
 func GenerateCypher(rows, cols []string) (string, int, int) {

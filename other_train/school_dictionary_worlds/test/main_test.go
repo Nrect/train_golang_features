@@ -19,5 +19,17 @@ func TestGetCols(t *testing.T) {
 }
 
 func TestGetRows(t *testing.T) {
-	assert.Equal(t, len(games.GetRows(8)), 8, "should be equal")
+	assert.Equal(t, len(games.GetRows(1)), 1, "should be equal")
+	assert.Equal(t, len(games.GetRows(4)), 1, "should be equal")
+	assert.Equal(t, len(games.GetRows(8)), 2, "should be equal")
+	assert.Equal(t, len(games.GetRows(12)), 3, "should be equal")
+	assert.Equal(t, len(games.GetRows(16)), 4, "should be equal")
+	assert.Equal(t, len(games.GetRows(20)), 5, "should be equal")
+	assert.Equal(t, len(games.GetRows(24)), 6, "should be equal")
+	assert.Equal(t, len(games.GetRows(28)), 7, "should be equal")
+	assert.Equal(t, len(games.GetRows(32)), 8, "should be equal")
+
+	assert.Equal(t, len(games.GetRows(-1)), 0, "should be equal")
+	assert.Equal(t, len(games.GetRows(0)), 0, "should be equal")
+	assert.Equal(t, len(games.GetRows(100)), 0, "should be equal")
 }
