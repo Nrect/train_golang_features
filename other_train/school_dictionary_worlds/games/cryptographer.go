@@ -12,31 +12,31 @@ func LunchCryptographer() {
 	words, clearString := GetDictionaryWords()
 	fmt.Println(words)
 
-	uniqSymbols, matrixExercise := FillMatrix(clearString)
+	uniqSymbols := GenerateUniqSymbols(clearString)
+	matrixExercise := GenerateMatrixExercise(uniqSymbols)
+
 	fmt.Println(uniqSymbols)
 	fmt.Println(matrixExercise)
 }
 
-// FillMatrix fill the matrix with unique elements from clear string. Return uniqSymbols and matrixExercise
-func FillMatrix(clearString string) (map[string]string, map[string]*models.MatrixBody) {
-	uniqSymbols := make(map[string]string)
+// TODO: сделать логику, если у нас нечетное кол-во, то добавить в пустые ячейки случайные символ
+// Опять же, если символ прям случайный, если нет, то какой эффективный алгоритм поиска другого символа?
+// Сделать строку с ру словарем и строку с уник символами и сравнить их разницу
+// Для начала сделаю со случайным значением, затем уже и с уникальным
+
+// СЕЙЧАС ПОРЯДОК НАПИСАНИЯ ФУНКЦИЙ ЗАВИСТ ОТ ИХ ИСПОЛЬЗОВАНЯ СВЕРХУ ВНИЗ
+
+// GenerateExercise generate matrix based exercise
+func GenerateExercise() {
+	// TODO:
+}
+
+// GenerateMatrixExercise fill the matrix with unique elements. Return uniqSymbols and matrixExercise
+func GenerateMatrixExercise(uniqSymbols map[string]string) map[string]*models.MatrixBody {
 	matrixExercise := make(map[string]*models.MatrixBody)
 
 	cols := GetCols()
 	rows := GetRows(len(uniqSymbols))
-
-	for i, w := 0, 0; i < len(clearString); i += w {
-		runeValue, width := utf8.DecodeRuneInString(clearString[i:])
-
-		convertedValue := string(runeValue)
-
-		_, ok := uniqSymbols[convertedValue]
-		if !ok {
-			uniqSymbols[convertedValue] = convertedValue
-		}
-
-		w = width
-	}
 
 	for _, symbol := range uniqSymbols {
 		cypher, col, row := GenerateCypher(rows, cols)
@@ -67,13 +67,42 @@ func FillMatrix(clearString string) (map[string]string, map[string]*models.Matri
 		}
 	}
 
-	return uniqSymbols, matrixExercise
+	return matrixExercise
 }
 
+// GenerateUniqSymbols generate unique symbols map from clearString
+func GenerateUniqSymbols(clearString string) map[string]string {
+	uniqSymbols := make(map[string]string)
+
+	for i, w := 0, 0; i < len(clearString); i += w {
+		runeValue, width := utf8.DecodeRuneInString(clearString[i:])
+
+		convertedValue := string(runeValue)
+
+		_, ok := uniqSymbols[convertedValue]
+		if !ok {
+			uniqSymbols[convertedValue] = convertedValue
+		}
+
+		w = width
+	}
+
+	return uniqSymbols
+}
+
+// GenerateCypher generate data for matrix exercise
+func GenerateCypher(rows, cols []string) (string, int, int) {
+	randomCol := rand.Intn(len(cols) - 0)
+	randomRow := rand.Intn(len(rows) - 0)
+	return rows[randomRow] + cols[randomCol], randomCol, randomRow
+}
+
+// GetCols get static 4 columns
 func GetCols() []string {
 	return []string{"1", "2", "3", "4"}
 }
 
+// GetRows get dynamic rows. Length row depend on uniqSymbolsCount
 func GetRows(uniqSymbolsCount int) []string {
 	template := []string{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З"}
 
@@ -96,18 +125,14 @@ func GetRows(uniqSymbolsCount int) []string {
 	} else if uniqSymbolsCount <= 32 {
 		template = template[:8]
 	}
+
 	return template
 }
 
-func GenerateCypher(rows, cols []string) (string, int, int) {
-	randomCol := rand.Intn(len(cols) - 0)
-	randomRow := rand.Intn(len(rows) - 0)
-	return rows[randomRow] + cols[randomCol], randomCol, randomRow
-}
-
+// GetDictionaryWords get data for building game
 func GetDictionaryWords() ([]string, string) {
-	template := "весело;воробей;ворона;девочка;дежурный;деревня;заяц;карандаш;класс;корова;лисица;мальчик;машина;медведь;молоко"
-	//template := "молоко"
+	//template := "весело;воробей;ворона;девочка;дежурный;деревня;заяц;карандаш;класс;корова;лисица;мальчик;машина;медведь;молоко"
+	template := "молоко"
 
 	template = strings.TrimSpace(template)
 
