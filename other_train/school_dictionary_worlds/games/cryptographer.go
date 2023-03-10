@@ -10,16 +10,18 @@ import (
 
 func LunchCryptographer() {
 	words, clearString := GetDictionaryWords()
-	fmt.Println(words)
 
 	uniqSymbols := GenerateUniqSymbols(clearString)
 	matrixExercise := GenerateMatrixExercise(uniqSymbols)
 
-	fmt.Println(uniqSymbols)
-	fmt.Println(matrixExercise)
+	//TODO: c одним словом работает, с фулл строкой паника летит
+	exercise := GenerateExercise(words, matrixExercise)
+	fmt.Println(exercise[0].Exercise, exercise[0].Answer)
 }
 
-// TODO: сделать логику, если у нас нечетное кол-во, то добавить в пустые ячейки случайные символ
+// TODO: УБРАТЬ ЛОГИКУ КОДИРОВОК ТК ГОШКА И С БИТАМИ НОРМ РАБОТАЕТ)
+
+// TODO: сделать логику, если у нас нечетное кол-во, то добавить в пустые ячейки случайные символы
 // Опять же, если символ прям случайный, если нет, то какой эффективный алгоритм поиска другого символа?
 // Сделать строку с ру словарем и строку с уник символами и сравнить их разницу
 // Для начала сделаю со случайным значением, затем уже и с уникальным
@@ -27,8 +29,31 @@ func LunchCryptographer() {
 // СЕЙЧАС ПОРЯДОК НАПИСАНИЯ ФУНКЦИЙ ЗАВИСТ ОТ ИХ ИСПОЛЬЗОВАНЯ СВЕРХУ ВНИЗ
 
 // GenerateExercise generate matrix based exercise
-func GenerateExercise() {
-	// TODO:
+func GenerateExercise(words []string, matrixExercise map[string]*models.MatrixBody) []*models.ExerciseBody {
+
+	result := make([]*models.ExerciseBody, len(words)-1)
+
+	for _, word := range words {
+		exercise := ""
+
+		for _, character := range word {
+
+			for _, m := range matrixExercise {
+				if m.Value == string(character) {
+					exercise += m.Cypher + " "
+				}
+			}
+
+		}
+
+		result = append(result, &models.ExerciseBody{
+			Exercise: strings.TrimSpace(exercise),
+			Answer:   word,
+		})
+
+	}
+
+	return result
 }
 
 // GenerateMatrixExercise fill the matrix with unique elements. Return uniqSymbols and matrixExercise
@@ -131,8 +156,8 @@ func GetRows(uniqSymbolsCount int) []string {
 
 // GetDictionaryWords get data for building game
 func GetDictionaryWords() ([]string, string) {
-	//template := "весело;воробей;ворона;девочка;дежурный;деревня;заяц;карандаш;класс;корова;лисица;мальчик;машина;медведь;молоко"
-	template := "молоко"
+	template := "весело;воробей;ворона;девочка;дежурный;деревня;заяц;карандаш;класс;корова;лисица;мальчик;машина;медведь;молоко"
+	//template := "молоко"
 
 	template = strings.TrimSpace(template)
 
