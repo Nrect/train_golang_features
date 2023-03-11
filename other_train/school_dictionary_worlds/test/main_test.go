@@ -14,7 +14,7 @@ func GetTemplateMap() map[string]string {
 }
 
 func TestGenerateExercise(t *testing.T) {
-	words := []string{Template}
+	words := []string{Template, Template}
 	matrixExercise := map[string]*models.MatrixBody{
 		"А1": {
 			Value:  "б",
@@ -51,10 +51,16 @@ func TestGenerateExercise(t *testing.T) {
 	}
 
 	result := games.GenerateExercise(words, matrixExercise)
-	need := []*models.ExerciseBody{{
-		Exercise: "А1 А2 А1 А3 А2 А4 Б1 Б2 Б3 Б4",
-		Answer:   Template,
-	}}
+	need := []*models.ExerciseBody{
+		{
+			Exercise: "А1 А2 А1 А3 А2 А4 Б1 Б2 Б3 Б4",
+			Answer:   Template,
+		},
+		{
+			Exercise: "А1 А2 А1 А3 А2 А4 Б1 Б2 Б3 Б4",
+			Answer:   Template,
+		},
+	}
 
 	assert.Equal(t, need[0].Exercise, result[0].Exercise, "Exercise should be equal")
 	assert.Equal(t, need[0].Answer, result[0].Answer, "Answer should be equal")

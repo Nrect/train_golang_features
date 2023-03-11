@@ -14,8 +14,8 @@ func LunchCryptographer() {
 	uniqSymbols := GenerateUniqSymbols(clearString)
 	matrixExercise := GenerateMatrixExercise(uniqSymbols)
 
-	//TODO: c одним словом работает, с фулл строкой паника летит
 	exercise := GenerateExercise(words, matrixExercise)
+	fmt.Println(matrixExercise)
 	fmt.Println(exercise[0].Exercise, exercise[0].Answer)
 }
 
@@ -31,7 +31,7 @@ func LunchCryptographer() {
 // GenerateExercise generate matrix based exercise
 func GenerateExercise(words []string, matrixExercise map[string]*models.MatrixBody) []*models.ExerciseBody {
 
-	result := make([]*models.ExerciseBody, len(words)-1)
+	result := make([]*models.ExerciseBody, 0, len(words)-1)
 
 	for _, word := range words {
 		exercise := ""
