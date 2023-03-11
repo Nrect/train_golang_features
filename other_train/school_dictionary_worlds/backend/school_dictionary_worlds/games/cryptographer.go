@@ -1,22 +1,26 @@
 package games
 
 import (
-	"fmt"
 	"math/rand"
 	"school_dictionary_worlds/models"
 	"strings"
 	"unicode/utf8"
 )
 
-func LunchCryptographer() {
+func LunchCryptographer() *models.ExerciseResponse {
 	words, clearString := GetDictionaryWords()
 
 	uniqSymbols := GenerateUniqSymbols(clearString)
 	matrixExercise := GenerateMatrixExercise(uniqSymbols)
 
 	exercise := GenerateExercise(words, matrixExercise)
-	fmt.Println(matrixExercise)
-	fmt.Println(exercise[0].Exercise, exercise[0].Answer)
+
+	response := models.ExerciseResponse{
+		Matrix:   matrixExercise,
+		Exercise: exercise,
+	}
+
+	return &response
 }
 
 // TODO: УБРАТЬ ЛОГИКУ КОДИРОВОК ТК ГОШКА И С БИТАМИ НОРМ РАБОТАЕТ)
