@@ -168,5 +168,5 @@ func GetDictionaryWords() ([]string, string) {
 	words := strings.Split(template, ";")
 	clearString := strings.Replace(template, ";", "", -1)
 
-	return words, clearString
+	return words[:5], clearString
 }
