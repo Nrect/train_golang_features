@@ -15,9 +15,12 @@ func LunchCryptographer() *models.ExerciseResponse {
 
 	exercise := GenerateExercise(words, matrixExercise)
 
+	rows := GetRows(len(uniqSymbols))
+
 	response := models.ExerciseResponse{
 		Matrix:   matrixExercise,
 		Exercise: exercise,
+		Rows:     rows,
 	}
 
 	return &response
