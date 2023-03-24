@@ -15,14 +15,22 @@
 
         for (const [key, value] of Object.entries(res['matrix'])) {
             matrixElements.push({
-                row: value['cypher'][0],
+                rowName: key[0],
                 col: value['col'],
                 value: value['value'],
+                row: value['row'],
             })
         }
 
         matrixElements = matrixElements
     });
+
+    let getCardValue = (row, i) => {
+        const findElement = matrixElements.find(
+            element => element.rowName === row && element.col === i
+        )
+        return findElement ? findElement.value : ''
+    }
 
 </script>
 
@@ -31,15 +39,16 @@
     <div class="w-5/6 m-auto">
         <div class="cypher-game m-auto">
             <div class="cypher-game__header flex">
-                <CypherCard></CypherCard>
-                <CypherCard>1</CypherCard>
-                <CypherCard>2</CypherCard>
-                <CypherCard>3</CypherCard>
-                <CypherCard>4</CypherCard>
+                {#each Array(5) as _, i}
+                    <CypherCard>{i > 0 ? i : ''}</CypherCard>
+                {/each}
             </div>
-            <div class="cypher-game__rows">
+            <div class="cypher-game__rows flex flex-wrap">
                 {#each rows as row}
                     <CypherCard>{row}</CypherCard>
+                    {#each Array(4) as _, i}
+                        <CypherCard>{getCardValue(row, i)}</CypherCard>
+                    {/each}
                 {/each}
             </div>
         </div>
@@ -47,15 +56,13 @@
 
     <ul>
         {#each matrixElements as matrixElement}
-            {#if matrixElement.row === 'А'}
-                <li>
-                    <label>
-                        {matrixElement.row}
-                        {matrixElement.col}
-                        {matrixElement.value}
-                    </label>
-                </li>
-            {/if}
+            <li>
+                <label>
+                    {matrixElement.rowName}
+                    {matrixElement.row}
+                    {matrixElement.value}
+                </label>
+            </li>
 
         {/each}
     </ul>
