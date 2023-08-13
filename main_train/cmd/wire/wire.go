@@ -14,6 +14,6 @@ import (
 // InitializeEvent инжектор
 func InitializeEvent(phrase string) (Event, error) {
 	// Провайдеры
-	wire.Build(NewEvent, NewGreeter, NewMessage)
+	wire.Build(SuperSet)
 	return Event{}, nil
 }

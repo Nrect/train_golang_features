@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+var SuperSet = wire.NewSet(NewEvent, NewGreeter, NewMessage)
+
 func NewMessage(phrase string) Message {
 	return Message(phrase)
 }
@@ -50,5 +52,3 @@ func (e Event) Start() {
 	msg := e.Greeter.Greet()
 	fmt.Println(msg)
 }
-
-var SuperSet = wire.NewSet(NewEvent, NewGreeter, NewMessage)
