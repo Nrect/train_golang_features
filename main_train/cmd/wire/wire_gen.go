@@ -9,9 +9,12 @@ package main
 // Injectors from wire.go:
 
 // InitializeEvent инжектор
-func InitializeEvent() Event {
-	message := NewMessage()
+func InitializeEvent(phrase string) (Event, error) {
+	message := NewMessage(phrase)
 	greeter := NewGreeter(message)
-	event := NewEvent(greeter)
-	return event
+	event, err := NewEvent(greeter)
+	if err != nil {
+		return Event{}, err
+	}
+	return event, nil
 }
